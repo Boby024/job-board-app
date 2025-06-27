@@ -10,12 +10,14 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class JobItemFilterDTO {
-    private String keyword;
+    private String keyword; // title or description
     private String location;
     private String type;
     private String company;
-    Integer page = 0;
-    Integer size = 10;
+    private Double minSalary;
+    private Double maxSalary;
+    Integer page;
+    Integer size;
     String sortBy;
     String sortDir;
 }

@@ -1,5 +1,6 @@
 package com.job_board_app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,8 @@ public class JobItem {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 5000)
+//    @Lob
     private String description;
 
     @Column(name = "location")
@@ -33,6 +35,9 @@ public class JobItem {
 
     @Column(name = "type")
     private String type; // e.g., Full-Time, Part-Time, Contract
+
+//    @Column(name = "workType")
+//    private String workType; // home office | remote, hybrid,
 
     @Column(name = "salary")
     private Double salary;
@@ -51,5 +56,6 @@ public class JobItem {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 }

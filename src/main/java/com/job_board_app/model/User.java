@@ -45,7 +45,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     private String description;
 
     @Column(name = "created_at")
@@ -61,7 +61,7 @@ public class User implements UserDetails {
     private ERole role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Job> jobs;
+    private List<JobItem> jobs;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

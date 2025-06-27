@@ -1,6 +1,5 @@
 package com.job_board_app.payload.request;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;

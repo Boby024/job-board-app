@@ -20,7 +20,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterUserDTO registerUserDTO) {
         try {
-            System.out.println(registerUserDTO);
             AuthResponse res = authenticationService.register(registerUserDTO);
             return ResponseEntity.ok(res);
         } catch (Exception e) {

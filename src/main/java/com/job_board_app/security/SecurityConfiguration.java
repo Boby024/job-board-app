@@ -24,12 +24,12 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers(
                         "/auth/**",
-                        "h2-console",
+                        "/h2-console/**",
                         "account/test"
                         )
                         .permitAll()
                         .requestMatchers("/account/users").hasAuthority(ERole.ADMIN.name())
-                        .requestMatchers("/account/user").hasAnyAuthority(ERole.USER.name(), ERole.ADMIN.name())
+                        .requestMatchers("/account/user", "/job/**").hasAnyAuthority(ERole.USER.name(), ERole.ADMIN.name())
 
                         .anyRequest().authenticated())
 
