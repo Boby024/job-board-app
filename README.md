@@ -1,7 +1,7 @@
 # Job Board Manager
 
 Next Features:
-- Job item Details (CRUD operations)
+- Job item detail (CRUD operations)
 - Advanced querying techniques
 - Search functionality
 - Complex filtering
@@ -9,6 +9,7 @@ Next Features:
 - Email notifications
 
 Key Learning Outcomes:
+- Features around User: Register, Login, Role, JWT Authentication, Email Verification
 - Implementing custom queries with JPA
 - Creating search functionality
 - Working with Criteria API
@@ -25,7 +26,7 @@ Dependencies:
 - Spring Security
 - Spring Data JPA
 - Postgresql
-- Lombok (optional, for reducing boilerplate code)
+- Lombok (for reducing boilerplate code)
 - Hibernate
 - jsonwebtoken
-
+- Jakarta Validation
