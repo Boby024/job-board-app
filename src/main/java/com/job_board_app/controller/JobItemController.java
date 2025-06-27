@@ -103,7 +103,7 @@ public class JobItemController {
             @RequestParam(required = false) String company,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "created_at") String sortBy,
+            @RequestParam(defaultValue = "createdAt") String sortBy,
             @RequestParam(defaultValue = "DESC") String sortDir
     ) {
         JobItemFilterDTO filter = new JobItemFilterDTO();

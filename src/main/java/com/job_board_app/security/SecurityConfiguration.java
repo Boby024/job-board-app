@@ -25,7 +25,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> request.requestMatchers(
                         "/auth/**",
                         "/h2-console/**",
-                        "account/test"
+                        "account/test",
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
                         )
                         .permitAll()
                         .requestMatchers("/account/users").hasAuthority(ERole.ADMIN.name())
