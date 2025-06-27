@@ -19,12 +19,10 @@ import java.util.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements UserDetails {
-    //    @GeneratedValue(strategy = GenerationType.UUID)
-//    @GeneratedValue(generator = "UUID")
-    // @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Id
+    @GeneratedValue(generator = "UUID")
     @Column(name = "id", columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
@@ -53,14 +51,17 @@ public class User implements UserDetails {
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = true)
     private Instant updatedAt;
 
-    @Column(name = "profile picture_dd", nullable = true)
+    @Column(name = "profile_picture_id", nullable = true)
     private Integer profilePictureId;
 
     @Enumerated(EnumType.STRING)
     private ERole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Job> jobs;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

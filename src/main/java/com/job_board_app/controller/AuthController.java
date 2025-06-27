@@ -20,9 +20,11 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterUserDTO registerUserDTO) {
         try {
+            System.out.println(registerUserDTO);
             AuthResponse res = authenticationService.register(registerUserDTO);
             return ResponseEntity.ok(res);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -31,7 +33,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody LoginUserDTO loginUserDTO) {
         try {
             AuthResponse res = authenticationService.authenticate(loginUserDTO);
-            if (res.getMsg_() != null) {
+            if (res.getMsg_() == null) {
                 return ResponseEntity.ok(res);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -46,7 +48,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> refresh(@RequestParam("token") String refreshToken) {
         try {
             AuthResponse res = authenticationService.refreshToken(refreshToken);
-            if (res.getMsg_() != null) {
+            if (res.getMsg_() == null) {
                 return ResponseEntity.ok(res);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

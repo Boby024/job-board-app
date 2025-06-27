@@ -31,12 +31,19 @@ public class AuthenticationService {
                 .email(registerUserDTO.getEmail())
                 .password(passwordEncoder.encode(registerUserDTO.getPassword()))
                 .role(ERole.USER)
+                .birthDate(registerUserDTO.getBirthDate())
+                .description(registerUserDTO.getDescription())
+                .profilePictureId(null)
                 .createdAt(Instant.now())
+                .updatedAt(Instant.now())
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefresh(new HashMap<>(), user);
+
         return AuthResponse.builder()
+                .id(String.valueOf(user.getId()))
+                .email(user.getEmail())
                 .token(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -47,13 +54,15 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(loginUserDTO.getEmail(), loginUserDTO.getPassword())
         );
         var user = userRepository.findByEmail(loginUserDTO.getEmail());
-        String jwtToken = null, refreshToken = null, msg_ = null;
+        String jwtToken = null, refreshToken = null, msg_ = "Invalid email or password";
         if (user.isPresent()) {
             jwtToken = jwtService.generateToken(user.get());
             refreshToken = jwtService.generateRefresh(new HashMap<>(), user.get());
         }
-        msg_ = "Invalid email or password";
+        msg_ = null;
         return AuthResponse.builder()
+                .id(String.valueOf(user.get().getId()))
+                .email(user.get().getEmail())
                 .token(jwtToken)
                 .refreshToken(refreshToken)
                 .msg_(msg_)
@@ -63,18 +72,19 @@ public class AuthenticationService {
 
     public AuthResponse refreshToken(String refreshToken) {
         var user = userRepository.findByEmail(jwtService.getEmailFromToken(refreshToken));
-        String jwtToken = null, newRefreshToken = null, msg_ = null;
+        String jwtToken = null, newRefreshToken = null, msg_ = "Invalid refresh token";
         if (user.isPresent()) {
             jwtToken = jwtService.generateToken(user.get());
             newRefreshToken = jwtService.generateRefresh(new HashMap<>(), user.get());
         }
-        msg_ = "Invalid refresh token";
+        msg_ = null;
         return AuthResponse.builder()
                 .token(jwtToken)
                 .refreshToken(newRefreshToken)
                 .msg_(msg_)
                 .build();
     }
+
 
     public Boolean validateToken(String token) {
         return jwtService.validateToken(token);

@@ -41,4 +41,9 @@ public class AccountController {
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(accountService.getAllUsers());
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> seyHello() {
+        return ResponseEntity.ok("Hello from User Controller!");
+    }
 }
