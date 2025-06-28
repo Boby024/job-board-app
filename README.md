@@ -46,7 +46,7 @@ cd job-board-app</code></pre>
 <p>The application will start on <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>.</p>
 
 <h3>✅ Access API documentation (Swagger UI)</h3>
-<p>We use <strong>Springdoc OpenAPI</strong> for automatic API docs.</p>
+<p><strong>Springdoc OpenAPI</strong> has been used for automatic API docs.</p>
 <ul>
   <li>Open your browser and go to:<br>
     <a href="http://localhost:8080/swagger-ui/index.html" target="_blank">http://localhost:8080/swagger-ui/index.html</a>
